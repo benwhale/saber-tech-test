@@ -24,8 +24,13 @@
    - Now that I've created that, I want to create a new entry in my database each time I call that API endpoint with a url. Lets start by adding a post endpoint to accept the URL and return an object with the doc
 
    - Now I've done that; I need to actually push it to DynamoDB. Time to read up.
+   - This now works!
 
 3a. Listing urls? (or do later)
+
+    - Decided it felt like a complete feature to list urls
+    - I've added in a scan for all entries (looks like it's limited to 1MB, so a smarter solution needed in future to scroll through)
+    - Seemed sensible to test the looking up as well, so added a single url/slug get
 
 4. File Upload feature (only upload file)
 
