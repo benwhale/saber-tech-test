@@ -13,4 +13,8 @@ source ./venv/bin/activate
 cdk deploy
 ```
 
+Run locally: `uvicorn main:app --reload`
+
+navigate to /docs for swagger docs
+
 TODO - ensure that top level README has instructions for installing AWS CLI/CDK or at least mentions them.
