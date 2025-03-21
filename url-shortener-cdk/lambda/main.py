@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from slug_gen import generate_slug
+from db_service import put_shortened_url
 from pydantic import BaseModel
 
 class Url(BaseModel):
@@ -9,9 +10,7 @@ class Url(BaseModel):
 class File(BaseModel):
     file: str # temporary
 
-class URLDocument(BaseModel):
-    url: str
-    slug: str
+
 
 app = FastAPI()
 handler = Mangum(app)
@@ -24,5 +23,5 @@ async def hello():
 @app.post("/url")
 async def shorten_url(url: Url):
     slug = generate_slug()
-    doc = URLDocument(url=url.url, slug=slug)
-    return doc
+    return put_shortened_url(slug, url.url)
+

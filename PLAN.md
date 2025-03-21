@@ -7,7 +7,7 @@
    i. outstanding question whether docker container would also work
    b. Initialise new cdk repo
    c. Set up the permissions using infrastructure-as-code (we are going to be deploying using CDK or Terraform, but CDK sounds lighter-weight)
-   d. Create hello world lambda and deploy it 
+   d. Create hello world lambda and deploy it
 
 3. URL Shortening feature (API only) --> Dynamo DB <-- we are here
 
@@ -21,7 +21,9 @@
 
    - I will need boto3 for db interaction, but I'm going to start an initial version with just the slug generation
 
-   - Now that I've created that, I want to create a new entry in my database each time I call that API endpoint with a url. Lets start by updating the lambda to accept 
+   - Now that I've created that, I want to create a new entry in my database each time I call that API endpoint with a url. Lets start by adding a post endpoint to accept the URL and return an object with the doc
+
+   - Now I've done that; I need to actually push it to DynamoDB. Time to read up.
 
 3a. Listing urls? (or do later)
 

@@ -17,7 +17,7 @@ export class UrlShortenerCdkStack extends cdk.Stack {
 
     // Create DynamoDB Table for URL Shortener
     const urlTable = new dynamodb.Table(this, 'UrlShortenerTable', {
-      partitionKey: { name: 'shortCode', type: dynamodb.AttributeType.STRING },
+      partitionKey: { name: 'slug', type: dynamodb.AttributeType.STRING },
       removalPolicy: cdk.RemovalPolicy.DESTROY, // Deletes table when stack is removed (for testing)
     });
 
@@ -49,7 +49,7 @@ export class UrlShortenerCdkStack extends cdk.Stack {
         },
       }),
       role: lambdaRole,
-      environment: {
+      environment: { // Use environment variables in the lambda function to store names of resources
         TABLE_NAME: urlTable.tableName,
         BUCKET_NAME: fileUploadBucket.bucketName,
       },
