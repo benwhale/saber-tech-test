@@ -17,6 +17,7 @@
      - Given we are in python, and it'll save an API call, I think we should try to add to the database and if we get an error saying the key is already in use then we try again
      - Either that, or does DynamoDB handle random keys? Maybe we should utilise DB functionality instead -- research this
    - Python libraries... slugify wouldn't be random. Sqids (formerly Hashids) could be interesting. Should probably use a salt to make it more secure. Although it doesn't need to be secure, just a random slug associated in the database. So I could just generate a random number and put it in base 32? Or perhaps just use random.choices from the alphanumeric characters for the number of characters I need given it's not actually important it just needs to be short and random
+   - NOTE - I should definitely unit test this :D
 
 3a. Listing urls? (or do later)
 
