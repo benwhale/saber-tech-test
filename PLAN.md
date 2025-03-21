@@ -32,9 +32,21 @@
     - I've added in a scan for all entries (looks like it's limited to 1MB, so a smarter solution needed in future to scroll through)
     - Seemed sensible to test the looking up as well, so added a single url/slug get
 
+---
+
+Diversion from plan. Doing some research into best way to host that UI on-demand
+
+Looks like AWS Amplify is my easiest option with 12 months free tier.
+
+---
+
 4. File Upload feature (only upload file)
 
-   - lambda for uploading a file and displaying the url?
+   - Current plan is to re-use the same lambda that I'm currently working with (but I do need to read up and check if that's a bad idea - though task says deploy as an AWS Lambda function which implies single)
+   - https://fastapi.tiangolo.com/tutorial/request-files/
+
+   - I've now got a file upload working that returns the location. Plan will be to use my URL shortener to create and store this in DynamoDB.
+   - However I'm going to need to make sure you can distinguish between files and links, so maybe a new field needed for my objects (optional filename?)
 
 5. File Upload generates short link to file destination?
 

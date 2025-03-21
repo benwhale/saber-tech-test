@@ -1,16 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from mangum import Mangum
 from slug_gen import generate_slug
 from db_service import put_shortened_url, get_all_urls, get_url_by_slug
 from pydantic import BaseModel
+from s3_service import upload_file as upload_file_to_s3
+
 
 class Url(BaseModel):
     url: str
-
-class File(BaseModel):
-    file: str # temporary
-
-
 
 app = FastAPI()
 handler = Mangum(app)
@@ -32,3 +29,9 @@ async def list_urls():
 @app.get("/url/{slug}")
 async def get_url(slug: str):
     return get_url_by_slug(slug) # TODO: Consider converting the response to a friendly object
+
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    return await upload_file_to_s3(file)
+    
+    
