@@ -19,7 +19,9 @@
    - Python libraries... slugify wouldn't be random. Sqids (formerly Hashids) could be interesting. Should probably use a salt to make it more secure. Although it doesn't need to be secure, just a random slug associated in the database. So I could just generate a random number and put it in base 32? Or perhaps just use random.choices from the alphanumeric characters for the number of characters I need given it's not actually important it just needs to be short and random
    - NOTE - I should definitely unit test this :D
 
-   - I will need boto3 for db interaction, but I'm going to start an initial version with just the 
+   - I will need boto3 for db interaction, but I'm going to start an initial version with just the slug generation
+
+   - Now that I've created that, I want to create a new entry in my database each time I call that API endpoint with a url. Lets start by updating the lambda to accept 
 
 3a. Listing urls? (or do later)
 

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from mangum import Mangum
-from sluggen import generate_slug
+from slug_gen import generate_slug
 
 app = FastAPI()
 handler = Mangum(app)
