@@ -93,3 +93,8 @@ Looks like AWS Amplify is my easiest option with 12 months free tier.
 11. Back to Backend -- error handling and logging
     ?. Tests
     ?. Improve return typing
+
+TODO
+
+- validate for empty input (ensure valid before sending request)
+- restore mobile menu
