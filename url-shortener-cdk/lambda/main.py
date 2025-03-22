@@ -7,8 +7,14 @@ from pydantic import BaseModel
 from s3_service import upload_file as upload_file_to_s3, generate_presigned_url
 from fastapi.exceptions import HTTPException
 
-class Url(BaseModel):
+class UrlRequest(BaseModel):
     url: str
+
+class UrlResponse(BaseModel):
+    slug: str
+    url: str
+
+
 
 app = FastAPI()
 handler = Mangum(app)
@@ -19,9 +25,9 @@ async def hello():
     return {"slug": slug}
 
 @app.post("/url")
-async def shorten_url(url: Url):
+async def shorten_url(url: UrlRequest) -> UrlResponse:
     slug = generate_slug()
-    response = put_shortened_url(slug, url.url)
+    put_shortened_url(slug, url.url)
     return {
         "slug": slug,
         "url": url.url
