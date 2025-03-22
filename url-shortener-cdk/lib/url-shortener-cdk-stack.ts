@@ -57,6 +57,12 @@ export class UrlShortenerCdkStack extends cdk.Stack {
     // Create API Gateway for FastAPI
     new apigateway.LambdaRestApi(this, 'UrlShortenerApi', {
       handler: urlShortenerLambda,
+      defaultCorsPreflightOptions: {
+        allowOrigins: apigateway.Cors.ALL_ORIGINS,
+        allowMethods: apigateway.Cors.ALL_METHODS,
+        allowHeaders: apigateway.Cors.DEFAULT_HEADERS,
+        allowCredentials: true
+      }
     });
 
     // Outputs

@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import RedirectResponse, FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 from slug_gen import generate_slug
 from db_service import put_shortened_url, get_all_items, get_item_by_slug, put_file
@@ -14,9 +15,15 @@ class UrlResponse(BaseModel):
     slug: str
     url: str
 
-
-
 app = FastAPI()
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, replace with Vercel URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 handler = Mangum(app)
 
 @app.get("/")
