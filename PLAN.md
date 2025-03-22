@@ -59,11 +59,21 @@ Looks like AWS Amplify is my easiest option with 12 months free tier.
 6. listing of urls and files (listing is the core requirement, deleting would be out of scope, but consider CRUD)
 
    - new lambda to get everything from db?
-   - I should provide a means to list all URLs and to list all files
+   - I should provide a means to list all URLs and to list all files, and to list everything
+   - For later, a simple way to deal with auth/multi users would be to put them in a folder/sub section of s3 (check terms)
    - I should also update my get function to allow lambda/slug to redirect to the file location or download the file
+   - I also need to think about downloading the file from S3.
+   - I don't like my response objects either yet, I should tidy those up at the end.
+
+   - Looks like generating a pre-signed URL is a sensible approach to allow file downloads without making the bucket public (big security problem there)
 
 7. UI - initialise Next.js repo with tailwind - remember React hooks and state management.
+
+   - Decide whether to use Amplify or if I should use Vercel given it's what Saber use
 
 8. Homepage - enter a URL
 9. Homepage - upload a file
 10. Display list of short URLs and file
+
+11. Back to Backend -- error handling and logging
+    ?. Tests

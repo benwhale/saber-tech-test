@@ -28,6 +28,30 @@ def generate_safe_filename(s: str):
     # Return the sanitised name and extension
     return f"{name}.{extension}"
 
+def generate_presigned_url(key: str, original_filename: str):
+    """
+    Generate a presigned URL for a given key
+    """
+
+    try:
+        params = {
+            'Bucket': os.environ['BUCKET_NAME'],
+            'Key': key
+        }
+
+        # If the original filename is provided, add it to the response  
+        if original_filename:
+            params['ResponseContentDisposition'] = f'attachment; filename="{original_filename}"'
+
+        return s3.generate_presigned_url(
+            'get_object',
+            Params=params,
+            ExpiresIn=3600 # URL expires in 1 hour
+        )
+    except ClientError as e:
+        logging.error(e)
+        raise HTTPException(status_code=500, detail=str(e))
+
 async def upload_file(file: UploadFile): 
     slug = generate_slug() # Use a slug to avoid collisions
     filename = generate_safe_filename(file.filename)
@@ -47,10 +71,8 @@ async def upload_file(file: UploadFile):
 
         logging.info(f"Uploaded file {file.filename} to {file_url} with key {file_key}")
         
-        
         return {
             "filename": file.filename, # Original filename the user provided
-            "url": file_url, # The URL of the uploaded file
             "key": file_key # The key of the uploaded file which contains the slug and the sanitised filename
         }
     

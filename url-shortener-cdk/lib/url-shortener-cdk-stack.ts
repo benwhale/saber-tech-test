@@ -32,8 +32,8 @@ export class UrlShortenerCdkStack extends cdk.Stack {
     // Allow Lambda to Write to DynamoDB
     urlTable.grantReadWriteData(lambdaRole);
 
-    // Allow Lambda to Upload to S3
-    fileUploadBucket.grantPut(lambdaRole);
+    // Allow Lambda to Upload and Read from S3
+    fileUploadBucket.grantReadWrite(lambdaRole);
 
     // Create Lambda Function (FastAPI Backend)
     const urlShortenerLambda = new lambda.Function(this, 'UrlShortenerLambda', {

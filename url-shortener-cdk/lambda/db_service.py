@@ -20,7 +20,7 @@ def put_shortened_url(slug: str, url: str):
     )
     return response
 
-def put_file(slug: str, filename: str, file_url: str, file_key: str):
+def put_file(slug: str, filename: str, file_key: str):
     """
     Put a file in the database
     """
@@ -30,7 +30,6 @@ def put_file(slug: str, filename: str, file_url: str, file_key: str):
             "slug": {"S": slug}, # The slug for the shortened url
             "type": {"S": "file"},
             "filename": {"S": filename}, # Gives the ability to display the filename in the UI
-            "url": {"S": file_url},
             "file_key": {"S": file_key},
             "created_at": {"S": datetime.now().isoformat()}
         }
@@ -38,7 +37,6 @@ def put_file(slug: str, filename: str, file_url: str, file_key: str):
     return {
         "slug": slug,
         "filename": filename,
-        "url": file_url,
         "file_key": file_key,
         "created_at": datetime.now().isoformat() # TODO: Cheating for debugging
     }
