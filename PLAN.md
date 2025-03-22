@@ -48,13 +48,19 @@ Looks like AWS Amplify is my easiest option with 12 months free tier.
    - I've now got a file upload working that returns the location. Plan will be to use my URL shortener to create and store this in DynamoDB.
    - However I'm going to need to make sure you can distinguish between files and links, so maybe a new field needed for my objects (optional filename?)
 
+-- reflecting a bit on testing at the moment
+
 5. File Upload generates short link to file destination?
 
-   - first lambda to upload the file calls second lambda to shorten the url
+   - I've implemented this, and am doing some manual testing. Noticed I need to sanitise the file string, so I've implemented a quick method for that
+   - Could do with some unit tests for that method
+   - Reflecting that it would be cool to have GitHub setup to run cdk deploy each time I push, but that's extra effort at the moment for a throwaway project
 
 6. listing of urls and files (listing is the core requirement, deleting would be out of scope, but consider CRUD)
 
    - new lambda to get everything from db?
+   - I should provide a means to list all URLs and to list all files
+   - I should also update my get function to allow lambda/slug to redirect to the file location or download the file
 
 7. UI - initialise Next.js repo with tailwind - remember React hooks and state management.
 
