@@ -21,7 +21,11 @@ async def hello():
 @app.post("/url")
 async def shorten_url(url: Url):
     slug = generate_slug()
-    return put_shortened_url(slug, url.url)
+    response = put_shortened_url(slug, url.url)
+    return {
+        "slug": slug,
+        "url": url.url
+    }
 
 @app.get("/all")
 async def list_urls():
@@ -37,13 +41,13 @@ async def get_item(slug: str):
 
     
     if item_type == "url":
-        return RedirectResponse(url=item["url"]["S"])
+        return RedirectResponse(url=item["url"]["S"], status_code=307)
     elif item_type == "file":
         presigned_url = generate_presigned_url(
             key=item["file_key"]["S"],
             original_filename=item["filename"]["S"]
             )
-        return RedirectResponse(url=presigned_url)
+        return RedirectResponse(url=presigned_url, status_code=307)
 
 @app.get("/{slug}/detail")
 async def get_item_detail(slug: str):
