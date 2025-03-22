@@ -21,7 +21,7 @@ export function useItems(limit: number = 10) {
       
       setItems(prev => [...prev, ...data.Items]);
       setHasMore(!!data.LastEvaluatedKey);
-    } catch (err) {
+    } catch {
       setError('Failed to fetch items');
     } finally {
       setLoading(false);

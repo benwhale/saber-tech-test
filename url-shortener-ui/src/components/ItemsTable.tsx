@@ -29,7 +29,7 @@ export default function ItemsTable() {
         {items.map((item) => (
           <tr key={item.slug}>
             <td className="px-6 py-4 text-sm text-gray-500">
-              {item.type === "url" ? "🔗 Link" : "📄 File"}
+              {item.type === "url" ? "Link" : "File"}
             </td>
             <td className="px-6 py-4 text-sm text-gray-900">
               {item.type === "url" ? item.url : item.filename}
