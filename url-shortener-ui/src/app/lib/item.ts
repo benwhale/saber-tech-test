@@ -3,7 +3,7 @@ interface UrlItem {
     slug: string;
     url: string;
     type: 'url';
-    createdAt: string;
+    created_at: string;
 }
 
 interface FileItem {
@@ -11,7 +11,7 @@ interface FileItem {
     filename: string;
     file_key: string;
     type: 'file';
-    createdAt: string;
+    created_at: string;
 }
 
 export type Item = UrlItem | FileItem;

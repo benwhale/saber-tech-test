@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Item } from '@/app/lib/types';
+import { Item } from '@/app/lib/item';
 
 export function useItems(limit: number = 10) {
   const [items, setItems] = useState<Item[]>([]);

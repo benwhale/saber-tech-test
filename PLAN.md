@@ -9,7 +9,7 @@
    c. Set up the permissions using infrastructure-as-code (we are going to be deploying using CDK or Terraform, but CDK sounds lighter-weight)
    d. Create hello world lambda and deploy it
 
-3. URL Shortening feature (API only) --> Dynamo DB <-- we are here
+3. URL Shortening feature (API only) --> Dynamo DB
 
    - This needs associate a long url with a random slug.
    - We should ensure the random slug is long enough to limit clashes - my first assumption is to use a UUID, although this will not actually shorten it.
@@ -71,10 +71,25 @@ Looks like AWS Amplify is my easiest option with 12 months free tier.
 
    - Decide whether to use Amplify or if I should use Vercel given it's what Saber use
    - I am going to use Vercel as it's well integrated with next.js. I can use useState for state management
+   - I initialised it, and generated a basic structure with the app router.
+   - I'm quite new to tailwind, so I lifted a free tailwind template and broke it down into a couple of components. Trying to MVP while looking ok
+   - React hooks I knew the core concept, but had not used in some years so relied a bit on lift and shift...
+   - Got a simple input box and button connected to the API. Needed to update CORS, I've temporarily allowed everything for the purposes of dev
+   - Can now enter a url and upload it! So I've done stage 8 already
+   - improvements: more permissive URL entry and returning the full short URL from the API would be prefered.
 
 8. Homepage - enter a URL
-9. Homepage - upload a file
+   Done above
+
+9. Upload File page - upload a file
+
+   - I've generated a file form and hooked it into the upload function
+
 10. Display list of short URLs and file
+
+- I've generated a table and sorted out date formatting from the API so this should now work. Could do with some suspense/loading behaviour
+- Delete functionality would be a good next step
 
 11. Back to Backend -- error handling and logging
     ?. Tests
+    ?. Improve return typing

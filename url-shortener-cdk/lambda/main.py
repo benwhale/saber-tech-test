@@ -46,25 +46,25 @@ async def list_urls():
 
 @app.get("/{slug}")
 async def get_item(slug: str):
-    response = get_item_by_slug(slug) # TODO: Consider converting the response to a friendly object
-    if "Item" not in response:
+    item = get_item_by_slug(slug) # TODO: Consider converting the response to a friendly object
+    if not item:
         raise HTTPException(status_code=404, detail="Item not found")
-    item = response["Item"]
-    item_type = item["type"]["S"]
-
     
-    if item_type == "url":
-        return RedirectResponse(url=item["url"]["S"], status_code=307)
-    elif item_type == "file":
+    if item["type"] == "url":
+        return RedirectResponse(url=item["url"], status_code=307)
+    elif item["type"] == "file":
         presigned_url = generate_presigned_url(
-            key=item["file_key"]["S"],
-            original_filename=item["filename"]["S"]
+            key=item["file_key"],
+            original_filename=item["filename"]
             )
         return RedirectResponse(url=presigned_url, status_code=307)
 
 @app.get("/{slug}/detail")
 async def get_item_detail(slug: str):
-    return get_item_by_slug(slug) # TODO: Consider converting the response to a friendly object
+    item = get_item_by_slug(slug)
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return item
 
 
 @app.post("/upload")
