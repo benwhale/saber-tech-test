@@ -70,6 +70,7 @@ Looks like AWS Amplify is my easiest option with 12 months free tier.
 7. UI - initialise Next.js repo with tailwind - remember React hooks and state management.
 
    - Decide whether to use Amplify or if I should use Vercel given it's what Saber use
+   - I am going to use Vercel as it's well integrated with next.js. I can use useState for state management
 
 8. Homepage - enter a URL
 9. Homepage - upload a file
