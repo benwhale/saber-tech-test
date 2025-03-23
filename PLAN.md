@@ -93,8 +93,11 @@ Looks like AWS Amplify is my easiest option with 12 months free tier.
 11. Fixed an issue with empty input and restored the mobile menu from the template.
     Next I'm going to make the API return the full link (which is in the requirements, and I had to work around in the UI)
 
-12. Back to Backend -- error handling and logging - though minimal due to time
-    ?. Tests
-    ?. Improve return typing
+- I've done that now, but I've maintained it for the ItemsTable and left a comment explaining why.
 
-TODO
+I'm fairly happy with the functional behaviour now, and very aware that this was intended to be a 2.5 hour task and I'm straying into
+productionising territory now, and would be looping back to write unit and integration tests next.
+
+Error handling and logging are also minimal - if this was something I was using properly I would want to make sure I could easily debug and see what is going on inside the system - have been light on these for time.
+
+I think I'm going to create a top level overview and ensure that I've got enough README instructions for someone to deploy my system themselves, then I'll do the Project Planning and Delegation task

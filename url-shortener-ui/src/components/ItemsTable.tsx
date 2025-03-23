@@ -39,8 +39,12 @@ export default function ItemsTable() {
                 {item.type === "url" ? item.url : item.filename}
               </td>
               <td className="px-6 py-4 text-sm text-blue-600 whitespace-nowrap">
+                {/* This is a bit of a hack to get the full URL.
+                I didn't want to store the full URL in the db in case the location of the API changes.
+                As long as we aren't dealing with unreasonable amounts of data, we could map it in the dynamodb response handling and populate a field with the full URL.
+                It works for today though. */}
                 <a
-                  href={`${process.env.NEXT_PUBLIC_API_URL}/${item.slug}`}
+                  href={`${process.env.NEXT_PUBLIC_API_URL}${item.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

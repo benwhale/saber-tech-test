@@ -15,6 +15,7 @@ class UrlRequest(BaseModel):
 class UrlResponse(BaseModel):
     slug: str
     url: str
+    short_link: str
 
 app = FastAPI()
 # Add CORS middleware
@@ -40,7 +41,7 @@ async def shorten_url(url: UrlRequest) -> UrlResponse:
     return {
         "slug": slug,
         "url": url.url,
-        "short_link": f"{base_url}/{slug}"
+        "short_link": f"{base_url}/{slug}" 
     }
 
 @app.get("/all")
