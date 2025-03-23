@@ -90,11 +90,11 @@ Looks like AWS Amplify is my easiest option with 12 months free tier.
 - I've generated a table and sorted out date formatting from the API so this should now work. Could do with some suspense/loading behaviour
 - Delete functionality would be a good next step
 
-11. Back to Backend -- error handling and logging
+11. Fixed an issue with empty input and restored the mobile menu from the template.
+    Next I'm going to make the API return the full link (which is in the requirements, and I had to work around in the UI)
+
+12. Back to Backend -- error handling and logging - though minimal due to time
     ?. Tests
     ?. Improve return typing
 
 TODO
-
-- validate for empty input (ensure valid before sending request)
-- restore mobile menu

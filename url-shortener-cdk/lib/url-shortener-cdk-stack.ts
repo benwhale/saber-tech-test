@@ -4,6 +4,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import * as cr from 'aws-cdk-lib/custom-resources';
 
 export class UrlShortenerCdkStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -49,13 +50,12 @@ export class UrlShortenerCdkStack extends cdk.Stack {
         },
       }),
       role: lambdaRole,
-      environment: { // Use environment variables in the lambda function to store names of resources
-        TABLE_NAME: urlTable.tableName,
-        BUCKET_NAME: fileUploadBucket.bucketName,
+      environment: { // Use environment variables in the lambda function to store names of resources. Populated in the custom resource below
+
       },
     });
     // Create API Gateway for FastAPI
-    new apigateway.LambdaRestApi(this, 'UrlShortenerApi', {
+    const api =new apigateway.LambdaRestApi(this, 'UrlShortenerApi', {
       handler: urlShortenerLambda,
       defaultCorsPreflightOptions: {
         allowOrigins: apigateway.Cors.ALL_ORIGINS,
@@ -65,7 +65,33 @@ export class UrlShortenerCdkStack extends cdk.Stack {
       }
     });
 
+     // Create Custom Resource to update Lambda environment
+     new cr.AwsCustomResource(this, 'UpdateLambdaEnvironment', {
+      onCreate: {
+        service: 'Lambda',
+        action: 'updateFunctionConfiguration',
+        parameters: {
+          FunctionName: urlShortenerLambda.functionName,
+          Environment: {
+            Variables: {
+              TABLE_NAME: urlTable.tableName,
+              BUCKET_NAME: fileUploadBucket.bucketName,
+              API_URL: api.url
+            }
+          }
+        },
+        physicalResourceId: cr.PhysicalResourceId.of('UpdateLambdaEnvironment')
+      },
+      policy: cr.AwsCustomResourcePolicy.fromStatements([
+        new iam.PolicyStatement({
+          actions: ['lambda:UpdateFunctionConfiguration'],
+          resources: [urlShortenerLambda.functionArn]
+        })
+      ])
+    });
+
     // Outputs
+    new cdk.CfnOutput(this, 'ApiUrl', { value: api.url });
     new cdk.CfnOutput(this, 'S3BucketName', { value: fileUploadBucket.bucketName });
     new cdk.CfnOutput(this, 'DynamoDBTableName', { value: urlTable.tableName });
   }
