@@ -8,7 +8,7 @@ export function useItems() {
   const [error, setError] = useState<string | null>(null);
 
 
-  const fetchItems = async (lastEvaluatedKey?: string) => {
+  const fetchItems = async () => {
     setLoading(true);
     try {
 
