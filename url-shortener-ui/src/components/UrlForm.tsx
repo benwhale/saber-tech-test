@@ -16,7 +16,7 @@ export default function UrlForm(props: UrlFormProps) {
           value={props.url}
           onChange={(e) => props.setUrl(e.target.value)}
           required
-          placeholder="Enter URL to shorten"
+          placeholder="Enter URL to shorten (requires http:// or https://)"
           className="w-80 rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
         />
         <button
