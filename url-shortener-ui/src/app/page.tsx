@@ -1,5 +1,6 @@
 "use client";
 import Header from "@/components/Header";
+import UrlForm from "@/components/UrlForm";
 
 import { useUrls } from "@/hooks/useUrls";
 import { useState } from "react";
@@ -21,22 +22,12 @@ export default function ShortenUrl() {
       <Header title="Shorten URL" />
       <main>
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="Enter URL to shorten"
-              className="w-80 rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2"
-            >
-              {loading ? "Shortening..." : "Shorten URL"}
-            </button>
-          </form>
+          <UrlForm
+            handleSubmit={handleSubmit}
+            url={url}
+            setUrl={setUrl}
+            loading={loading}
+          />
           {error && <p className="text-red-500">{error}</p>}
           {shortUrl && (
             <p className="mt-4">

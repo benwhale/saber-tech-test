@@ -37,8 +37,8 @@ export default function FileUploadForm() {
               file:mr-4 file:py-2 file:px-4
               file:rounded-md file:border-0
               file:text-sm file:font-semibold
-              file:bg-blue-50 file:text-blue-700
-              hover:file:bg-blue-100"
+              file:bg-indigo-50 file:text-indigo-700
+              hover:file:bg-indigo-100"
           />
         </div>
         <button
@@ -48,7 +48,7 @@ export default function FileUploadForm() {
             ${
               !file || loading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
+                : "bg-indigo-600 hover:bg-indigo-700"
             }`}
         >
           {loading ? "Uploading..." : "Upload File"}
@@ -59,7 +59,7 @@ export default function FileUploadForm() {
         <div className="mt-4">
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
-              className="bg-blue-600 h-2.5 rounded-full"
+              className="bg-indigo-600 h-2.5 rounded-full"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -75,7 +75,7 @@ export default function FileUploadForm() {
             href={shortUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 break-all"
+            className="text-indigo-600 hover:text-indigo-800 break-all"
           >
             {shortUrl}
           </a>
