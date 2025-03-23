@@ -13,8 +13,7 @@ export default function ShortenUrl() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = await shortenUrl(url);
-    // setShortUrl(result.shortUrl); // Would be nicer to provide the full URL
-    setShortUrl(`${process.env.NEXT_PUBLIC_API_URL}/${result.slug}`);
+    setShortUrl(result.short_link);
   };
 
   return (

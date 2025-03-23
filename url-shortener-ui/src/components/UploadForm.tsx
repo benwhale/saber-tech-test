@@ -10,9 +10,8 @@ export default function FileUploadForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!file) return;
-
     const result = await uploadFile(file);
-    setShortUrl(`${process.env.NEXT_PUBLIC_API_URL}/${result.slug}`);
+    setShortUrl(result.short_link);
     setFile(null);
     // Reset the file input
     const form = e.target as HTMLFormElement;

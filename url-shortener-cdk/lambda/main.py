@@ -26,6 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 handler = Mangum(app)
+base_url = os.environ["API_URL"].rstrip("/")
 
 @app.get("/")
 async def hello():
@@ -38,7 +39,8 @@ async def shorten_url(url: UrlRequest) -> UrlResponse:
     put_shortened_url(slug, url.url)
     return {
         "slug": slug,
-        "url": url.url
+        "url": url.url,
+        "short_link": f"{base_url}/{slug}"
     }
 
 @app.get("/all")
@@ -73,8 +75,6 @@ async def upload_file(file: UploadFile = File(...)):
     result = await upload_file_to_s3(file)
     filename, key = result.values()
     slug = generate_slug()
-
-    base_url = os.environ["API_URL"].rstrip("/")
 
     response = put_file(slug, filename, key)
     return {
